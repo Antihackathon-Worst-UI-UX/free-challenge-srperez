@@ -18,13 +18,14 @@ timer = 0;
 
 rock_size = 1024 / 1.5;
 
-x = room_width / 2;
-y = room_height / 3;
-
 image_alpha = 0;
 
 pause_drill = false;
 
 lmouse_x = mouse_x;
 lmouse_y = mouse_y;
+
+letter = 0;
+
+timer = 0;
 

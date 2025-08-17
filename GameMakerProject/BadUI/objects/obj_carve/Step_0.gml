@@ -52,8 +52,10 @@ if (pause_drill) {
 	if (point_distance(drill_x, drill_y, mouse_x, mouse_y) < tip_size) pause_drill = false;
 }
 
-if (mouse_check_button_pressed(mb_left)) {
-	stress += tween_exp(0, 10, random_range(0, 1));
+var do_carve = tip_collision();
+
+if (mouse_check_button_pressed(mb_left) and do_carve) {
+	stress += tween_exp(5, 10, random_range(0, 1));
 }
 
 if (drill_on) {
@@ -64,7 +66,7 @@ if (drill_on) {
 tip_recalc();
 
 
-var do_carve = tip_collision();
+
 if (drill_on) {
 	if (do_carve) {
 		array_push(carved_points, [tip_x, tip_y])

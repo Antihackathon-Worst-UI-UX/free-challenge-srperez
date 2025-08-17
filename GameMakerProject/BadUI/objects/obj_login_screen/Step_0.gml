@@ -1,6 +1,7 @@
 var stZoomOut = function(time) {
 	var t = time;
 	scale = tween_ease(1, 225 / 1024, t);
+	x = tween_ease(room_width / 2, sprite_get_xoffset(spr_desk), t);
 	y = tween_ease(room_height / 2, sprite_get_yoffset(spr_desk), t);
 }
 
@@ -12,30 +13,29 @@ var stChange = function(to) {
 switch state {
 	case "idle":
 		if keyboard_check_pressed(ord("Z")) {
-			stChange("zoom-out");
+			stZoomOut(1);
+			stChange("game-init");
 			break;
 		}
 		
 		if (mouse_check_button_pressed(mb_left)) {
-			stChange("waiting-clicked");
+			stChange("waiting");
 			break;
 		}
-	break;
-	
-	case "waiting-clicked":
-		waiting_clicks++;
-		stChange("waiting");
 	break;
 	
 	case "waiting":
 		
-		if (state_timer >= 60 * 4 or waiting_clicks > 3) {
-			stChange("zoom-out");
-			break;
-		}
+		
 		
 		if (mouse_check_button_pressed(mb_left)) {
-			stChange("waiting-clicked");
+			waiting_clicks++;
+			state_timer = 0;
+		}
+		
+		if (state_timer >= 60 * 3 or waiting_clicks >= 3) {
+			stChange("zoom-out");
+			recenter();
 			break;
 		}
 		
@@ -60,7 +60,7 @@ switch state {
 	break;
 	
 	case "game-init":
-		instance_create_layer(x, y, "game", obj_carve);
+		instance_create_layer(x, y, "game", obj_game);
 		stChange("game");
 	break;
 }
