@@ -1,0 +1,85 @@
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+body {
+    --bg-col: #292929;
+    --cont-col: #202020;
+    background-color: var(--bg-col);
+
+    font-size: 3cqmin;
+    
+    color: #d1d1d1;
+    margin: 0;
+    overflow: auto;
+}
+
+.navbar {
+    background-color: var(--cont-col);
+    width: 100%;
+    height: 8%;
+    max-height: 8%;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-left {
+    width: 50%;
+    display: flex;
+}
+
+.navbar-right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.navbar-div {
+    background: none;
+    height: 100%;
+    transition: all 0.2s;
+    
+    display: inline-block
+}
+
+.navbar-div-selected {
+    background-color: var(--bg-col);
+}
+
+.navbar-div:hover {
+    background-color: #111111;
+}
+
+.navbar-div-element {
+    height: 100%;
+}
+
+
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-container {
+    background-color: var(--cont-col);
+    border-radius: 10%;
+    aspect-ratio: 1 / 1;
+    height: 95cqmin;
+    width: auto;
+    overflow: hidden;
+}
+
+.game-frame {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+    width: auto;
+}
