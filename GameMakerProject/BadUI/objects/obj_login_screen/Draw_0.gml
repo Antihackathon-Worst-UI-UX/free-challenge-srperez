@@ -6,8 +6,9 @@ switch state {
 		desk_col = sys.col_bg;
 		break;
 }
-draw_sprite_ext(spr_desk, 0, x, y, desk_scale, desk_scale, 0, desk_col, 1);
+draw_sprite_ext(spr_desk, 0, x, y, desk_scale, desk_scale, 0, desk_col, image_alpha);
 draw_set_color(sys.col_bg);
+draw_set_alpha(image_alpha);
 var size = 1024 * scale;
 var half = size / 2;
 draw_rectangle(x - half, y - half, x + half, y + half, false);
@@ -26,4 +27,4 @@ var draw_field = function(half, pos_factor, label) {
 
 draw_field(half, -0.65, "Email");
 draw_field(half, -0.2, "Password");
-
+draw_set_alpha(1);

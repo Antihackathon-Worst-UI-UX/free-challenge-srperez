@@ -1,0 +1,1 @@
+draw_sprite_ext(spr_letters, letter, x, y, image_xscale * hover_scale, image_yscale * hover_scale, image_angle, sys.col_font, image_alpha);

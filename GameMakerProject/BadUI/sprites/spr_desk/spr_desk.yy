@@ -4,22 +4,22 @@
   "bboxMode":0,
   "bbox_bottom":1023,
   "bbox_left":0,
-  "bbox_right":1023,
-  "bbox_top":191,
+  "bbox_right":1020,
+  "bbox_top":145,
   "collisionKind":1,
   "collisionTolerance":0,
   "DynamicTexturePage":false,
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"22601dfa-0f2f-4e3c-b133-1f0631ce27e1","name":"22601dfa-0f2f-4e3c-b133-1f0631ce27e1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"","%Name":"e99600d8-43db-48f2-90fc-110f72ca3974","name":"e99600d8-43db-48f2-90fc-110f72ca3974","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
   "height":1024,
   "HTile":false,
   "layers":[
-    {"$GMImageLayer":"","%Name":"901632f0-d886-41be-a753-fcf25b2d3a2b","blendMode":0,"displayName":"default","isLocked":false,"name":"901632f0-d886-41be-a753-fcf25b2d3a2b","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
+    {"$GMImageLayer":"","%Name":"fa12458e-1e58-408b-b10f-55cc7a6fa902","blendMode":0,"displayName":"default","isLocked":false,"name":"fa12458e-1e58-408b-b10f-55cc7a6fa902","opacity":100.0,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
   "name":"spr_desk",
   "nineSlice":null,
@@ -71,8 +71,8 @@
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
             {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"22601dfa-0f2f-4e3c-b133-1f0631ce27e1","path":"sprites/spr_desk/spr_desk.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"67e23ff1-b5b0-4d56-8878-56cb188314b5","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"e99600d8-43db-48f2-90fc-110f72ca3974","path":"sprites/spr_desk/spr_desk.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
+              },"Disabled":false,"id":"68a14d4a-4239-4107-8349-f6edfbeb5dd2","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

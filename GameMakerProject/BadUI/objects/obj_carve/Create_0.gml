@@ -29,3 +29,23 @@ letter = 0;
 
 timer = 0;
 
+acc = {
+	borders : 0,
+	fill : 0,
+	garbage : 0
+}
+
+rsize = sprite_get_width(spr_rock);
+rscale = rock_size / rsize;
+
+letSize = sprite_get_width(spr_letters);
+letScale = rock_size / letSize;
+
+border_points = [];
+fill_points = [];
+garbage_points = [];
+border_total = 0;
+fill_total = 0;
+garbage_total = 0;
+
+new_dots = [];

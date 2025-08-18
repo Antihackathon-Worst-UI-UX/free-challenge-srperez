@@ -12,3 +12,6 @@ if (browser_width != width || browser_height != height)
 	window_set_size(size, size);
 	display_set_gui_size(size, size);
 }
+
+frame++;
+frame %= 1000000;

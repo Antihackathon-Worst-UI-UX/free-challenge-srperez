@@ -16,7 +16,7 @@ body {
     
     color: #d1d1d1;
     margin: 0;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .navbar {
@@ -89,10 +89,29 @@ body {
 	animation-name: fadeIn;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-out;
+	animation-duration: 0.4s;
+}
+
+.fade-in-delay {
+	opacity: 1;
+	animation-name: fadeInDelay;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
 	animation-duration: 0.8s;
 }
 
 @keyframes fadeIn {
+	0% {
+		opacity: 0;
+        transform: translateY(10%);
+	}
+	100% {
+		opacity: 1;
+        transform: translateY(0%);
+	}
+}
+
+@keyframes fadeInDelay {
 	0% {
 		opacity: 0;
         transform: translateY(10%);

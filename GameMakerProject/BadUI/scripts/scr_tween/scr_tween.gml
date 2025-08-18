@@ -44,3 +44,18 @@ function tween_exp(init_val, dest_val, time) {
 	var tween = bezier_linear([init_val, 0], [dest_val, 0], res[1]);
 	return tween[0];
 }
+
+
+function tween_alpha(ob, alpha, time) {
+	with obj_fader {
+		if (ob == target) instance_destroy();
+	}
+	
+	var f = instance_create_layer(0, 0, layer, obj_fader);
+	with f {
+		target = ob;
+		init_alpha = ob.image_alpha;
+		target_alpha = alpha;
+		total_time = time;
+	}
+}

@@ -4,15 +4,38 @@ function tip_in_block() {
 	return true;
 }
 
+function cullPass(callback = function(xx, yy) {}) {
+	for (var i = rscale / 2; i < rock_size; i += rscale) {
+		for (var j = rscale / 2; j < rock_size; j += rscale) {
+			var result = callback(i, j);
+			if (result) return true;
+		}
+	}
+	return false;
+}
+
+function dotPass(dot_array, callback = function(xx, yy, dotInd) {}) {
+	for (var i = 0; i < array_length(dot_array); i++) {
+		var p = dot_array[i];
+		
+		var result = callback(p[0], p[1], i);
+		if (result) return true;
+	}
+	return false;
+}
+
 function tip_collision() {
 	if (!tip_in_block()) return false;
 	
-	for (var i = 0; i < array_length(carved_points); i++) {
-		var p = carved_points[i];
-		var d = point_distance(p[0], p[1], tip_x, tip_y)
+	
+	if (dotPass(carved_points, function(xx, yy) {
+		var d = point_distance(xx, yy, tip_x, tip_y)
 		if (carve_size > d + tip_size) {
-			return false;
+			return true;
 		}
+		return false;
+	})) {
+		return false;
 	}
 	return true;
 }
@@ -23,6 +46,78 @@ function tip_recalc() {
 	tip_x = drill_x + dcos(tip_ang) * tip_length
 	
 	tip_y = drill_y - dsin(tip_ang) * tip_length;
+}
+
+function collider_start() {
+	var collider = instance_create_layer(rock_size / 2, rock_size / 2, layer, obj_lettercollider);
+	collider.image_xscale = letScale;
+	collider.image_yscale = letScale;
+	collider.image_index = letter;
+	return collider;
+}
+
+function collider_end() {
+	instance_destroy(obj_lettercollider);
+}
+
+function point_carve(point_ref, xx, yy) {
+	__x = xx - x + rock_size / 2;
+	__y = yy - y + rock_size / 2;
+	remove_points = [];
+	
+	dotPass(point_ref, function(xxx, yyy, dotInd) {
+		if (point_distance(__x, __y, xxx, yyy) <= rscale / 2 + tip_size) {
+			array_push(remove_points, dotInd);
+		}
+	});
+		
+	var removed = 0;
+	for (var i = 0; i < array_length(remove_points); i++) {
+		array_delete(point_ref, remove_points[i] - removed, 1);
+		removed++;
+	}
+}
+
+function accuracy_calc() {
+	dotPass(new_dots, function(xx, yy) {
+		point_carve(border_points, xx, yy);
+		point_carve(fill_points, xx, yy);
+		point_carve(garbage_points, xx, yy);
+	});
+	
+	
+	acc.borders = 1 - (array_length(border_points) / border_total);
+	acc.fill = (array_length(fill_points) / fill_total);
+	acc.garbage = 1 - (array_length(garbage_points) / garbage_total)
+	
+	new_dots = [];
+}
+
+if (border_total == 0) {
+	collider = collider_start();
+	
+	cullPass(function(xx, yy) {
+		if (collision_circle(xx, yy, rscale / 2, collider, true, true) != noone) {
+			array_push(border_points, [xx, yy]);
+		}
+		else {
+			collider.image_index++;
+			if (collision_circle(xx, yy, rscale / 2, collider, true, true) != noone) {
+				array_push(fill_points, [xx, yy]);
+			}
+			else {
+				array_push(garbage_points, [xx, yy]);
+			}
+			collider.image_index--;
+		}
+		return false;
+	});
+	
+	collider_end();
+	
+	border_total = array_length(border_points);
+	fill_total = array_length(fill_points);
+	garbage_total = array_length(garbage_points);
 }
 
 if (!drill_on) {
@@ -69,7 +164,7 @@ tip_recalc();
 
 if (drill_on) {
 	if (do_carve) {
-		array_push(carved_points, [tip_x, tip_y])
+		array_push(new_dots, [tip_x, tip_y])
 		var stress_mov =  (tip_size / max_stress) * 2 * stress;
 		var dvdir = random_range(-1, 1);
 		var dhdir = random_range(-1, 1);
@@ -99,8 +194,11 @@ if (drill_on) {
 			drill_angle = tween_linear(init_ang, target_ang, t);
 			tip_recalc();
 			if (tip_in_block())
-				array_push(carved_points, [tip_x, tip_y]);
+				array_push(new_dots, [tip_x, tip_y]);
 		}
+		
+		carved_points = array_concat(carved_points, new_dots);
+		accuracy_calc();
 	}
 	stress+= 0.1;
 	if (stress > max_stress) stress = max_stress;
@@ -108,6 +206,10 @@ if (drill_on) {
 else {
 	stress -= 0.2;
 	if (stress < 0) stress = 0;
+}
+
+if (mouse_check_button_released(mb_left)) {
+	accuracy_calc();
 }
 
 if (image_alpha < 1) {
