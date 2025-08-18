@@ -13,3 +13,5 @@ height = base_height;
 text_renders = {};
 
 frame = 0;
+
+game_size = 1024;

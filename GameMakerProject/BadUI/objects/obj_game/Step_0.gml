@@ -68,7 +68,18 @@ switch state {
 	break;
 	
 	case "workshop-trans":
-		cam_move();
+		var duration = 60;
+		cam_move(duration);
+		if (state_timer >= duration) {
+			cam_x = 0;
+			cam_y = 0;
+			cam_size = sys.game_size;
+			var carve = instance_create_layer(sys.game_size / 2, sys.game_size / 3, "game", obj_carve);
+			carve.letter = obj_key.letter / 2;
+			state = "workshop";
+			break;
+		}
+		
 	break;
 }
 

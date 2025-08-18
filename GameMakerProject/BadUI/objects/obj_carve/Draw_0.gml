@@ -37,20 +37,47 @@ var a = image_alpha * (0.1 + 0.1 * dsin(timer * 2));
 
 draw_sprite_ext(spr_letters, letter * 2, x - letOff, y - letOff, letScale, letScale, 0, letColor, a);
 
-draw_sprite_ext(spr_drill, 0, drill_x, drill_y, 1, 1, drill_angle, merge_color(c_white, c_red, clamp(stress / max_stress, 0, 1)), image_alpha);
+
 /*draw_set_color(c_lime);
 draw_circle(tip_x, tip_y, tip_size, false);
 */
 
-var acc_string = "Bordes: " + string(acc.borders)
-acc_string += "\nRelleno: " + string(acc.fill)
-acc_string += "\nBasura removida: " + string(acc.garbage)
+
+bar_scale = 0.7;
+bar_xoff = (1 - bar_scale) * sprite_get_width(spr_bar) * 0.5;
+
+var draw_bar = function(yy, type, scale) {
+	scale = clamp(scale, 0, 1);
+	var barCol = merge_color(c_red, c_yellow, scale * 2);
+	if (scale >= 0.5) barCol = merge_color(c_yellow, c_green, scale * 2 - 1);
+	
+	draw_sprite_part_ext(spr_bar, type * 2 + 1, 0, 0, scale * sprite_get_width(spr_bar), sprite_get_height(spr_bar), bar_xoff, yy, bar_scale, bar_scale, barCol, 1);
+	draw_sprite_ext(spr_bar, type * 2, bar_xoff, yy, bar_scale, bar_scale, 0, sys.col_font, 1);
+}
+
+var bar_padding = 10;
+var bar_jump_y = bar_padding + sprite_get_height(spr_bar) * bar_scale;
+var bar_y = y + rock_size / 2 + 30;
+var bar_center_x = sys.game_size / 2;
+var bar_center_y = function(bar_y) {return bar_y + sprite_get_height(spr_bar) * bar_scale / 2};
+var bar_text_wave = 3;
+
+draw_set_color(sys.col_font);
+draw_bar(bar_y, 0, bar_values[0]);
+text_render("BORDES", bar_center_x, bar_center_y(bar_y), 0.2 * bar_scale, fa_center, fa_middle, bar_text_wave);
+
+bar_y += bar_jump_y;
+
+draw_bar(bar_y, 1, bar_values[1]);
+text_render("RELLENO", bar_center_x, bar_center_y(bar_y), 0.2 * bar_scale, fa_center, fa_middle, bar_text_wave);
+
+bar_y += bar_jump_y;
+
+draw_bar(bar_y, 2, bar_values[2]);
+text_render("RESIDUOS", bar_center_x, bar_center_y(bar_y), 0.2 * bar_scale, fa_center, fa_middle, bar_text_wave);
 
 draw_set_color(c_white);
-draw_set_halign(fa_center);
-draw_set_valign(fa_top);
-draw_text(x, y + rock_size / 2 + 48, acc_string);
 
-draw_set_halign(fa_left);
+draw_sprite_ext(spr_drill, 0, drill_x, drill_y, 1, 1, drill_angle, merge_color(c_white, c_red, clamp(stress / max_stress, 0, 1)), image_alpha);
 
 timer++;

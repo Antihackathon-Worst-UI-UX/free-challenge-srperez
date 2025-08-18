@@ -52,7 +52,7 @@ function collider_start() {
 	var collider = instance_create_layer(rock_size / 2, rock_size / 2, layer, obj_lettercollider);
 	collider.image_xscale = letScale;
 	collider.image_yscale = letScale;
-	collider.image_index = letter;
+	collider.image_index = letter * 2;
 	return collider;
 }
 
@@ -118,6 +118,8 @@ if (border_total == 0) {
 	border_total = array_length(border_points);
 	fill_total = array_length(fill_points);
 	garbage_total = array_length(garbage_points);
+	
+	accuracy_calc();
 }
 
 if (!drill_on) {
@@ -211,6 +213,10 @@ else {
 if (mouse_check_button_released(mb_left)) {
 	accuracy_calc();
 }
+
+bar_values[0] += ((acc.borders / min_acc.borders) - bar_values[0]) / 12;
+bar_values[1] += (((acc.fill - min_acc.fill) / (1 - min_acc.fill)) - bar_values[1]) / 12;
+bar_values[2] += ((acc.garbage / min_acc.garbage) - bar_values[2]) / 12;
 
 if (image_alpha < 1) {
 	image_alpha += 0.1;

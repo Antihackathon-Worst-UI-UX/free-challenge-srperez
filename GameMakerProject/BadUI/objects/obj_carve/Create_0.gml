@@ -35,6 +35,12 @@ acc = {
 	garbage : 0
 }
 
+min_acc = {
+	borders : 0.85,
+	fill : 0.92,
+	garbage : 0.93
+}
+
 rsize = sprite_get_width(spr_rock);
 rscale = rock_size / rsize;
 
@@ -49,3 +55,5 @@ fill_total = 0;
 garbage_total = 0;
 
 new_dots = [];
+
+bar_values = [0, 1, 0];
