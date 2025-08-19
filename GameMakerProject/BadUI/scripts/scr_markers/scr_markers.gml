@@ -1,11 +1,7 @@
 function marker_data(mark){
-	marks = [
-		noone,
-		obj_marker1,
-		obj_marker2
-	]
 	
-	var ob = marks[mark];
+	
+	var ob = asset_get_index("obj_marker" + string(mark));
 	if (instance_exists(ob)) {
 		return [ob.x, ob.y, ob.sprite_width, ob.sprite_height];
 	}

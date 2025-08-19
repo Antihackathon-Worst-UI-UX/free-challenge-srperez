@@ -1,5 +1,5 @@
 carved_points = [];
-carve_size = 32;
+carve_size = sys.carve_size;
 drill_x = 0;
 drill_y = 0;
 
@@ -16,7 +16,7 @@ drill_angle = 0;
 drill_on = true;
 timer = 0;
 
-rock_size = 1024 / 1.5;
+rock_size = sys.rock_size;
 
 image_alpha = 0;
 
@@ -36,7 +36,7 @@ acc = {
 }
 
 min_acc = {
-	borders : 0.85,
+	borders : 0.82,
 	fill : 0.92,
 	garbage : 0.93
 }
@@ -57,3 +57,10 @@ garbage_total = 0;
 new_dots = [];
 
 bar_values = [0, 1, 0];
+
+state = "carving";
+state_timer = 0;
+
+bar_alpha = 1;
+
+done_btt = noone;

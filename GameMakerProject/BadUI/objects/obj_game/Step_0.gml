@@ -1,10 +1,4 @@
-var add_button = function(_x, _y, text, dir, action) {
-	var btt = instance_create_layer(_x, _y, layer, obj_button);
-	btt.text = text;
-	btt.arrow_dir = dir;
-	btt.action = action;
-	return btt;
-}
+
 
 var lstate = state;
 
@@ -80,6 +74,30 @@ switch state {
 			break;
 		}
 		
+	break;
+	
+	case "workshop":
+		if (!instance_exists(obj_carve)) {
+			cam_x = cam_target_x
+			cam_y = cam_target_y;
+			cam_size = cam_target_size;
+			
+			cam_target_x = -sys.game_size;
+			cam_target_y = 0;
+			cam_target_size = sys.game_size;
+			
+			tween_alpha(obj_taller, 1, 60);
+			state = "workshop-detrans";
+		}
+	break;
+	
+	case "workshop-detrans":
+		var duration = 60;
+		cam_move(duration);
+		if (state_timer >= duration) {
+			state = "taller";
+			break;
+		}
 	break;
 }
 

@@ -3,6 +3,7 @@ fnt_carved = font_add_sprite_ext(spr_letters, "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQ
 col_bg = $202020;
 col_input = $323232;
 col_font = $D1D1D1;
+col_carve = $6357D9;
 room_goto_next();
 
 base_width = room_width;
@@ -15,3 +16,5 @@ text_renders = {};
 frame = 0;
 
 game_size = 1024;
+rock_size = game_size / 1.5;
+carve_size = 32;

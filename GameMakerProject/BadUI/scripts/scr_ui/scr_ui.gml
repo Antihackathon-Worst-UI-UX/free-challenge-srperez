@@ -85,3 +85,23 @@ function text_render(text, x, y, scale, halign = fa_center, valign = fa_middle, 
 		}
 	}
 }
+
+function rock_break(x, y, scale = 1) {
+	var off = random_range(0, 360);
+	for (var i = 0; i < 3; i ++) {
+		var ang = off + i * (360/3);
+		var dist = 32;
+		var p = instance_create_layer(x + dcos(ang) * dist, y - dsin(ang) * dist, "particles", obj_rock_particle);
+		p.angle = ang;
+		p.image_xscale = scale;
+		p.image_yscale = scale;
+	}
+}
+
+function add_button(_x, _y, text, dir, action) {
+	var btt = instance_create_layer(_x, _y, "buttons", obj_button);
+	btt.text = text;
+	btt.arrow_dir = dir;
+	btt.action = action;
+	return btt;
+}
