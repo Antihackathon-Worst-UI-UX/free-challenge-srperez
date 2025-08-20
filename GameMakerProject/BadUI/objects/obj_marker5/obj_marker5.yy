@@ -1,12 +1,9 @@
 {
   "$GMObject":"",
-  "%Name":"obj_taller",
-  "eventList":[
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-  ],
+  "%Name":"obj_marker5",
+  "eventList":[],
   "managed":true,
-  "name":"obj_taller",
+  "name":"obj_marker5",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -31,9 +28,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_taller",
-    "path":"sprites/spr_taller/spr_taller.yy",
+    "name":"spr_5",
+    "path":"sprites/spr_5/spr_5.yy",
   },
   "spriteMaskId":null,
-  "visible":true,
+  "visible":false,
 }

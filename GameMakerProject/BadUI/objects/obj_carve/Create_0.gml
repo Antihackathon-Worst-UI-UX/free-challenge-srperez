@@ -1,7 +1,7 @@
 carved_points = [];
 carve_size = sys.carve_size;
-drill_x = 0;
-drill_y = 0;
+drill_x = sys.game_size + 100;
+drill_y = sys.game_size / 2;
 
 tip_x = 0;
 tip_y = 0;

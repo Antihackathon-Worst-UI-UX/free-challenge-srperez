@@ -14,11 +14,22 @@ function cam_move(time = 60) {
 	}
 }
 
+var ws_start_trans = function() {
+	state = "workshop-trans";
+	tween_alpha(obj_taller, 0, 60);
+	cam_prev_x = cam_x;
+	cam_prev_y = cam_y;
+	cam_prev_size = cam_size;
+			
+	cam_target_x = marker_left(2);
+	cam_target_y = marker_top(2);
+	cam_target_size = marker_width(2);
+}
 
 
 switch state {
 	case "desk-init":
-		add_button(100, 100, "taller", 1, function() {
+		btt_change = add_button(100, 100, "taller", 1, function() {
 			state = "taller-init";
 			tween_alpha(obj_login_screen, 0, 30);
 			//instance_create_layer(x, y, layer, obj_carve);
@@ -31,6 +42,11 @@ switch state {
 	case "desk":
 		cam_move();
 		if (state_timer == 30) tween_alpha(obj_login_screen, 1, 60);
+	break;
+	
+	case "desk-try-init":
+		btt_change.killed = true;
+		state = "desk-try";
 	break;
 	
 	case "taller-init":
@@ -48,17 +64,13 @@ switch state {
 		cam_move();
 		if (state_timer == 30) tween_alpha(obj_taller, 1, 60);
 		
-		if (keyboard_check_pressed(vk_space)) {
-			state = "workshop-trans";
-			tween_alpha(obj_taller, 0, 60);
-			cam_prev_x = cam_x;
-			cam_prev_y = cam_y;
-			cam_prev_size = cam_size;
-			
-			cam_target_x = marker_left(2);
-			cam_target_y = marker_top(2);
-			cam_target_size = marker_width(2);
+		if (keyboard_check(ord("S")) and keyboard_check_pressed(vk_space)) {
+			ws_start_trans();
 		}
+	break;
+	
+	case "workshop-init-trans":
+		ws_start_trans();
 	break;
 	
 	case "workshop-trans":
@@ -68,6 +80,10 @@ switch state {
 			cam_x = 0;
 			cam_y = 0;
 			cam_size = sys.game_size;
+			
+			with (obj_work_rock) {
+				if (state == "on-workshop") instance_destroy();
+			}
 			var carve = instance_create_layer(sys.game_size / 2, sys.game_size / 3, "game", obj_carve);
 			carve.letter = obj_key.letter / 2;
 			state = "workshop";
@@ -85,6 +101,10 @@ switch state {
 			cam_target_x = -sys.game_size;
 			cam_target_y = 0;
 			cam_target_size = sys.game_size;
+			
+			with obj_work_drill {
+				state = "waiting";
+			}
 			
 			tween_alpha(obj_taller, 1, 60);
 			state = "workshop-detrans";

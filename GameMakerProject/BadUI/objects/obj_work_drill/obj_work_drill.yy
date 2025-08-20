@@ -1,12 +1,13 @@
 {
   "$GMObject":"",
-  "%Name":"obj_taller",
+  "%Name":"obj_work_drill",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_taller",
+  "name":"obj_work_drill",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -31,8 +32,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_taller",
-    "path":"sprites/spr_taller/spr_taller.yy",
+    "name":"spr_drill",
+    "path":"sprites/spr_drill/spr_drill.yy",
   },
   "spriteMaskId":null,
   "visible":true,

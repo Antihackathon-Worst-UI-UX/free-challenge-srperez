@@ -93,6 +93,18 @@ function accuracy_calc() {
 	new_dots = [];
 }
 
+var doneFun = function() {
+	var rock = instance_create_layer(marker_x(2), marker_y(2), "carved_letters", obj_carved_rock);
+	__rock_points = [];
+	dotPass(carved_points, function(xx, yy, dotId) {
+		array_push(__rock_points, [xx - x + rock_size / 2, yy - y + rock_size / 2]);
+	});
+	rock.carved_points = __rock_points;
+					
+	array_push(obj_game.carved_letters, rock);
+	instance_destroy();
+};
+
 if (border_total == 0) {
 	collider = collider_start();
 	
@@ -239,19 +251,10 @@ switch state {
 			break;
 		}
 		
-		if (progress.border >= 0.0 and progress.garbage >= 0.0) {
+		if (keyboard_check(ord("S")) and keyboard_check_pressed(vk_enter)) doneFun();
+		if (progress.border >= 1 and progress.garbage >= 1) {
 			if (!instance_exists(done_btt)) {
-				done_btt = add_button(sys.game_size - 100, 100, "Listo", -1, function() {
-					var rock = instance_create_layer(marker_x(2), marker_y(2), "carved_letters", obj_carved_rock);
-					__rock_points = [];
-					dotPass(carved_points, function(xx, yy, dotId) {
-						array_push(__rock_points, [xx - x + rock_size / 2, yy - y + rock_size / 2]);
-					});
-					rock.carved_points = __rock_points;
-					
-					array_push(obj_game.carved_letters, rock);
-					instance_destroy();
-				});
+				done_btt = add_button(sys.game_size - 100, 100, "Listo", -1, doneFun);
 			}
 		}
 	break;

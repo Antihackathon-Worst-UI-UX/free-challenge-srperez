@@ -36,7 +36,14 @@ function text_render_access(text) {
 	return sys.text_renders[$ text];
 }
 
-function text_render(text, x, y, scale, halign = fa_center, valign = fa_middle, wave = 0, limit = -1) {
+enum render_gfx {
+	none,
+	black_border,
+	black_fill,
+	negative
+}
+
+function text_render(text, x, y, scale, halign = fa_center, valign = fa_middle, wave = 0, gfx = render_gfx.none, limit = -1) {
 	var letter_queue = text_render_access(text);
 	var lines = array_length(letter_queue);
 	var letSize = sprite_get_width(spr_letters);
@@ -79,7 +86,59 @@ function text_render(text, x, y, scale, halign = fa_center, valign = fa_middle, 
 			
 			var lx = x + (pivot_x + j * letSize) * scale + xWave;
 			var ly = y + (pivot_y + i * letSize) * scale + yWave;
-			draw_sprite_ext(spr_letters, q[j], lx, ly, scale, scale, 0, draw_get_color(), draw_get_alpha());
+			
+			var bcolor = draw_get_color();
+			var balpha = 1;
+			
+			var fcolor = draw_get_color();
+			var falpha = 0;
+			
+			var ocolor = draw_get_color();
+			var oalpha = 0;
+			
+			switch gfx {
+				case render_gfx.black_fill:
+					falpha = 1;
+					fcolor = c_black;
+				break;
+				
+				case render_gfx.black_border:
+					bcolor = c_black;
+					falpha = 1;
+				break;
+				
+				case render_gfx.negative:
+					bcolor = c_black;
+					fcolor = c_black;
+					falpha = 1;
+					oalpha = 1;
+				break;
+			}
+			
+			
+			// Draw outside
+			var prev_col = draw_get_color();
+			var prev_alpha = draw_get_alpha();
+			
+			draw_set_color(ocolor);
+			draw_set_alpha(oalpha * prev_alpha);
+			
+			draw_rectangle(
+				lx - letSize * scale * 0.5, 
+				ly - letSize * scale * 0.5,
+				lx + letSize * scale * 0.5,
+				ly + letSize * scale * 0.5,
+				false
+				)
+				
+			draw_set_color(prev_col);
+			draw_set_alpha(prev_alpha);
+			
+			// Draw fill
+			draw_sprite_ext(spr_letters, q[j] + 1, lx, ly, scale, scale, 0, fcolor, draw_get_alpha() * falpha);
+			
+			// Draw outline
+			draw_sprite_ext(spr_letters, q[j], lx, ly, scale, scale, 0, bcolor, draw_get_alpha() * balpha);
 			
 			charInd++;
 		}

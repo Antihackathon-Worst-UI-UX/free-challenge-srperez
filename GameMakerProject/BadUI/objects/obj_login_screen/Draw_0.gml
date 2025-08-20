@@ -28,3 +28,8 @@ var draw_field = function(half, pos_factor, label) {
 draw_field(half, -0.65, "Email");
 draw_field(half, -0.2, "Password");
 draw_set_alpha(1);
+draw_set_color(sys.col_font);
+
+if (hover_limit > 0) {
+	text_render(hover_text, mouse_x + 20, mouse_y + 20, 0.15, fa_left, fa_top, 5, render_gfx.black_fill, hover_limit);
+}

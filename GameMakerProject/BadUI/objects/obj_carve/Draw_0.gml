@@ -62,7 +62,7 @@ draw_circle(tip_x, tip_y, tip_size, false);
 bar_scale = 0.7;
 bar_xoff = (1 - bar_scale) * sprite_get_width(spr_bar) * 0.5;
 
-var draw_bar = function(yy, type, scale, txt) {
+var draw_bar = function(yy, type, scale, txt, gfx) {
 	scale = clamp(scale, 0, 1);
 	var bar_center_x = sys.game_size / 2;
 	var bar_center_y = yy + sprite_get_height(spr_bar) * bar_scale / 2;
@@ -75,7 +75,7 @@ var draw_bar = function(yy, type, scale, txt) {
 	draw_sprite_ext(spr_bar, type * 2, bar_xoff, yy, bar_scale, bar_scale, 0, sys.col_font, image_alpha * bar_alpha);
 	
 	draw_set_alpha(image_alpha * bar_alpha);
-	text_render(txt, bar_center_x, bar_center_y, 0.2 * bar_scale, fa_center, fa_middle, bar_text_wave);
+	text_render(txt, bar_center_x, bar_center_y, 0.2 * bar_scale, fa_center, fa_middle, bar_text_wave, gfx);
 	draw_set_alpha(1);
 }
 
@@ -85,15 +85,15 @@ var bar_y = y + rock_size / 2 + 30;
 
 
 draw_set_color(sys.col_font);
-draw_bar(bar_y, 0, bar_values[0], "BORDES");
+draw_bar(bar_y, 0, bar_values[0], "BORDES", render_gfx.black_fill);
 
 bar_y += bar_jump_y;
 
-draw_bar(bar_y, 1, bar_values[1], "RELLENO");
+draw_bar(bar_y, 1, bar_values[1], "RELLENO", render_gfx.black_border);
 
 bar_y += bar_jump_y;
 
-draw_bar(bar_y, 2, bar_values[2], "RESIDUO");
+draw_bar(bar_y, 2, bar_values[2], "RESIDUO", render_gfx.negative);
 
 draw_set_color(c_white);
 

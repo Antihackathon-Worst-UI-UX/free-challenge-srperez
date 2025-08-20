@@ -10,9 +10,13 @@ var stChange = function(to) {
 	state = to;
 }
 
+window_set_cursor(cr_default);
+
+var lstate = state;
+
 switch state {
 	case "idle":
-		if keyboard_check_pressed(ord("Z")) {
+		if keyboard_check_pressed(ord("S")) {
 			stZoomOut(1);
 			stChange("game-init");
 			break;
@@ -63,6 +67,54 @@ switch state {
 		instance_create_layer(x, y, "game", obj_game);
 		stChange("game");
 	break;
+	
+	case "game":
+		if (obj_game.state != "desk") break;
+		if (instance_number(obj_carved_rock) > 0) {
+			
+			if (abs(mouse_x - x) < 128 and abs(mouse_y - y) < 128) {
+				hover_limit++;
+				window_set_cursor(cr_handpoint);
+				if (mouse_check_button_pressed(mb_left)) {
+					stChange("try-trans");
+					hover_limit = 0;
+					obj_game.state = "desk-try-init";
+					break;
+				}
+			}
+			else {
+				hover_limit -= 0.5;
+				
+			}
+			hover_limit = clamp(hover_limit, 0, string_length(hover_text));
+		}
+	break;
+	
+	case "try-trans":
+		var trans_time = 60;
+		stZoomOut((trans_time - state_timer) / trans_time);
+		
+		if (state_timer >= trans_time) {
+			btt_back = add_button(100, y + 300, "volver", 1, function() {
+				state = "try-detrans";
+				state_timer = 0;
+			});
+			stChange("try");
+			break;
+		}
+	break;
+	
+	case "try-detrans":
+		var detrans_time = 60;
+		stZoomOut(state_timer / detrans_time);
+		
+		if (state_timer >= detrans_time) {
+			stChange("game");
+			obj_game.state = "desk-init";
+		}
+	break;
 }
 
 state_timer++;
+
+if (lstate != state) state_timer = 0;

@@ -13,3 +13,5 @@ cam_prev_size = cam_size;
 cam_target_size = cam_size;
 
 carved_letters = [];
+
+btt_change = noone;

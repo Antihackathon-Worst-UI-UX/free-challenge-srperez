@@ -15,3 +15,6 @@ hsp = 0;
 grav = 0.3;
 
 hover_scale = 1;
+
+lmouse_x = mouse_x;
+lmouse_y = mouse_y;

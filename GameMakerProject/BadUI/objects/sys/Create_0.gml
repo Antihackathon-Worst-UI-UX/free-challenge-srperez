@@ -18,3 +18,5 @@ frame = 0;
 game_size = 1024;
 rock_size = game_size / 1.5;
 carve_size = 32;
+
+click_taken = false;
