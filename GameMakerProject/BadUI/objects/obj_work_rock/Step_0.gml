@@ -81,7 +81,7 @@ switch state {
 			if (place_meeting(x, y, obj_floor) or place_meeting(x, y, obj_key)) {
 				var bpos = [[-1, -1], [1, -1], [-1, 1], [1, 1]];
 				for (var i = 0; i < array_length(bpos); i++) {
-					rock_break(x + sprite_width * 0.25 * bpos[i][0], y + sprite_height * 0.25 * bpos[i][1], 0.5);
+					rock_break(x + sprite_width * 0.25 * bpos[i][0], y + sprite_height * 0.25 * bpos[i][1], 1);
 				}
 				
 				instance_destroy();
@@ -93,3 +93,19 @@ switch state {
 visual_scale += (vs_target - visual_scale) / 6;
 
 image_alpha = obj_taller.image_alpha;
+
+if (x > 0) {
+	image_alpha = obj_login_screen.image_alpha;
+	if (y > room_height + 200) {
+		y = -200;
+	}
+	if (vsp > 200) {
+		rock_break(x, y, random_range(0.5, 2));
+	}
+	if (vsp > sys.game_size) {
+		for (var i = 0; i < sys.game_size; i++) {
+			rock_break(x + random_range(-100, 100), i, random_range(0.5, 2));
+		}
+		instance_destroy();
+	}
+}

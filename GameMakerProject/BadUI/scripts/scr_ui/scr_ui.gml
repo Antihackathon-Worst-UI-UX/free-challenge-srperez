@@ -1,3 +1,17 @@
+function index_to_letter(ind) {
+	var let = chr(ord("A") + floor(ind / 2));
+			
+	switch ind {
+		case 52: let = "*" break;
+		case 54: let = "." break;
+		case 56: let = "," break;
+		case 58: let = "!" break;
+		case 60: let = "?" break;
+		case -1: let = " " break;
+	}
+	
+	return let;
+}
 function text_render_cache(text) {
 	var letter_queue = [[]];
 	var line = 0;

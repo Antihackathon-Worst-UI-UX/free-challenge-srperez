@@ -1,10 +1,10 @@
 if (!killed) {
 	if (image_alpha < 1) image_alpha += 0.1;
 	
-	if (point_distance(x, y, mouse_x, mouse_y) < sprite_get_width(sprite_index) / 2) {
+	if (point_distance(x, y, mouse_x, mouse_y) < sprite_get_width(sprite_index) / 2 and !sys.click_taken) {
 		select_timer ++;
 		
-		if (mouse_check_button(mb_left)) {
+		if (mouse_check_button_pressed(mb_left)) {
 			action();
 			killed = true;
 		}

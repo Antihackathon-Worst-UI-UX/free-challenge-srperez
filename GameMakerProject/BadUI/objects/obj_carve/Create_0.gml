@@ -64,3 +64,6 @@ state_timer = 0;
 bar_alpha = 1;
 
 done_btt = noone;
+
+drill_spd = 0;
+drill_img = 0;

@@ -106,6 +106,8 @@ switch state {
 				state = "waiting";
 			}
 			
+			save_letters();
+			
 			tween_alpha(obj_taller, 1, 60);
 			state = "workshop-detrans";
 		}
@@ -116,6 +118,7 @@ switch state {
 		cam_move(duration);
 		if (state_timer >= duration) {
 			state = "taller";
+			save_letters();
 			break;
 		}
 	break;
@@ -128,3 +131,8 @@ if (lstate != state) {
 
 camera_set_view_pos(view_camera[0], cam_x, cam_y);
 camera_set_view_size(view_camera[0], cam_size, cam_size);
+
+if (keyboard_check(ord("S")) and keyboard_check_pressed(vk_backspace)) {
+	file_delete("rocks.txt");
+	game_restart();
+}

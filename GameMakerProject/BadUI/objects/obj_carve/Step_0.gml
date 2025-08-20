@@ -100,6 +100,7 @@ var doneFun = function() {
 		array_push(__rock_points, [xx - x + rock_size / 2, yy - y + rock_size / 2]);
 	});
 	rock.carved_points = __rock_points;
+	rock.letter_index = letter * 2;
 					
 	array_push(obj_game.carved_letters, rock);
 	instance_destroy();
@@ -184,6 +185,11 @@ switch state {
 		if (drill_on) {
 			drill_y += random_range(-1, 1) * 5;
 			drill_angle += random_range(-1, 1);
+			
+			drill_spd += 10;
+		}
+		else {
+			drill_spd --;
 		}
 
 		tip_recalc();
@@ -251,7 +257,7 @@ switch state {
 			break;
 		}
 		
-		if (keyboard_check(ord("S")) and keyboard_check_pressed(vk_enter)) doneFun();
+		if (keyboard_check(ord("S")) and keyboard_check_pressed(vk_space)) doneFun();
 		if (progress.border >= 1 and progress.garbage >= 1) {
 			if (!instance_exists(done_btt)) {
 				done_btt = add_button(sys.game_size - 100, 100, "Listo", -1, doneFun);
@@ -260,6 +266,7 @@ switch state {
 	break;
 	
 	case "breaking-rock":
+		drill_spd--;
 		var break_time = 40;
 		var break_wait = 40;
 		var break_total = break_time + break_wait;
@@ -293,6 +300,10 @@ switch state {
 		}
 	break;
 }
+
+drill_spd = clamp(drill_spd, 0, 30);
+
+drill_img += drill_spd / 60;
 
 state_timer++;
 if (state != lstate) state_timer = 0;

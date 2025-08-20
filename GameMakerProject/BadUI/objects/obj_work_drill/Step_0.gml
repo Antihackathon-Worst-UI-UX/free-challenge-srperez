@@ -57,6 +57,7 @@ switch state {
 	case "on-workshop":
 		pivot_x += (marker_x(5) - pivot_x) / 12;
 		pivot_y += (marker_y(5) - pivot_y) / 12;
+		image_speed = 30;
 		x = pivot_x + random_range(-5, 5);
 		y = pivot_y + random_range(-5, 5);
 	break;

@@ -15,5 +15,5 @@ if (arrow_dir == -1) halign = fa_right;
 
 draw_set_alpha(image_alpha);
 draw_set_color(sys.col_font);
-text_render(string_upper(text), x + sprite_width * 0.6 * arrow_dir, y, 0.2, halign, fa_middle, 3);
+text_render(string_upper(text), x + sprite_width * 0.6 * arrow_dir, y, 0.2, halign, fa_middle, 3, render_gfx.black_fill);
 draw_set_alpha(1);

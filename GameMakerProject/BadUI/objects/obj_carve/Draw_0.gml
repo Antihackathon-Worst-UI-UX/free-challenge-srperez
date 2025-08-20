@@ -97,6 +97,6 @@ draw_bar(bar_y, 2, bar_values[2], "RESIDUO", render_gfx.negative);
 
 draw_set_color(c_white);
 
-draw_sprite_ext(spr_drill, 0, drill_x, drill_y, 1, 1, drill_angle, merge_color(c_white, c_red, clamp(stress / max_stress, 0, 1)), image_alpha);
+draw_sprite_ext(spr_drill, drill_img, drill_x, drill_y, 1, 1, drill_angle, merge_color(c_white, c_red, clamp(stress / max_stress, 0, 1)), image_alpha);
 
 timer++;

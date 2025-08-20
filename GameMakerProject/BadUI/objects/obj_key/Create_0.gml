@@ -18,3 +18,5 @@ hover_scale = 1;
 
 lmouse_x = mouse_x;
 lmouse_y = mouse_y;
+
+soul_length = 0;

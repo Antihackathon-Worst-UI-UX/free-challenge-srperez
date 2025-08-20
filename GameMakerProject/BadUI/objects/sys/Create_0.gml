@@ -1,6 +1,7 @@
 draw_set_font(fnt_roboto);
 fnt_carved = font_add_sprite_ext(spr_letters, "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz*+.:,;!1?'", false, 0);
 col_bg = $202020;
+col_btt = $292929;
 col_input = $323232;
 col_font = $D1D1D1;
 col_carve = $6357D9;

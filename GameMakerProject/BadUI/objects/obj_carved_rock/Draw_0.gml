@@ -28,15 +28,29 @@ if (!surface_exists(rock_surface)) {
 
 
 
-var draw_me = function(col, xoff, yoff) {
-	var surScale = sprite_get_width(spr_rock) / sys.rock_size * scale;
+var draw_me = function(col, xoff, yoff, sc, a) {
+	var surScale = sprite_get_width(spr_rock) / sys.rock_size * scale * hover_scale * sc;
 	var surSize = sys.rock_size * surScale;
-	draw_surface_ext(rock_surface, xoff + x - surSize / 2, yoff + y - surSize / 2, surScale, surScale, 0, col, image_alpha);
+	draw_surface_ext(rock_surface, xoff + x - surSize / 2, yoff + y - surSize / 2, surScale, surScale, image_angle, col, image_alpha * a);
+}
+
+if (special) {
+	
+	var soul_length = 1;
+	var sep = 100;
+	var souls = 6;
+	
+	for (var i = 0; i < souls; i++) {
+		var dat = soul_data[i];
+		draw_me(c_white, dat[0], dat[1], dat[2], dat[3]);
+	}
 }
 
 var outPos = [[0, 1], [1, 0], [0, -1], [-1, 0]];
 for (var i = 0; i < array_length(outPos); i++) {
-	draw_me(c_black, 2 * outPos[i][0] * scale, 2 * outPos[i][1] * scale);
+	draw_me(c_black, 2 * outPos[i][0] * scale, 2 * outPos[i][1] * scale, 1, 1);
 }
 
-draw_me(c_white, 0, 0);
+
+
+draw_me(c_white, 0, 0, 1, 1);
