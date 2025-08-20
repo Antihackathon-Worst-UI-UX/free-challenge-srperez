@@ -20,11 +20,6 @@ var lscale = scale;
 
 switch state {
 	case "idle":
-		if keyboard_check_pressed(ord("S")) {
-			stZoomOut(1);
-			stChange("game-init");
-			break;
-		}
 		
 		if (mouse_check_button_pressed(mb_left)) {
 			stChange("waiting");
