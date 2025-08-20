@@ -2,7 +2,7 @@ image_alpha = lerp(image_alpha, alpha_fun(), 0.2);
 image_alpha = clamp(image_alpha, 0, 1);
 
 var hs_target = 1;
-if (!sys.click_taken) {
+if (!sys.click_taken and !instance_exists(obj_carve)) {
 	if (collision_point(mouse_x, mouse_y, id, true, false) != noone) {
 		hs_target = 1.2;
 		

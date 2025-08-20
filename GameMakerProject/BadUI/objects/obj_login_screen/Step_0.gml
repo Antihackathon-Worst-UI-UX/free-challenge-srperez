@@ -124,12 +124,26 @@ switch state {
 			if (mouse_check_button_pressed(mb_left)) {
 				login_hover = 0;
 				
-				if (string_length(obj_game.username) < 5) {
-					error_message = "Username must be at least 5 characters long.";
+				if (string_length(obj_game.username) < 4) {
+					error_message = "Username must be at least 4 characters long.";
 					if (obj_game.username == "") error_message = "Username is required.";
 				}
-				else if (!password) {
+				else if (!obj_game.password) {
 					error_message = "Password is required.";
+				}
+				else {
+					with all {
+						state = "end";
+					}
+					instance_destroy(obj_carved_rock);
+					instance_destroy(obj_button);
+					
+					var f = file_text_open_write("details.txt");
+					file_text_write_string(f, obj_game.username);
+					file_text_close(f);
+					error_message = "";
+					logged_in = true;
+					break;
 				}
 			}
 		}
@@ -147,6 +161,22 @@ switch state {
 		if (state_timer >= detrans_time) {
 			stChange("game");
 			obj_game.state = "desk-init";
+		}
+	break;
+	
+	case "end":
+		if (mouse_check_button_pressed(mb_left)) {
+			if (abs(mouse_x - x) < 256) {
+				if (abs(mouse_y - (y + logout_y)) < 64) {
+					file_delete("details.txt");
+					game_restart();
+				}
+				else if (abs(mouse_y - (y + forget_y)) < 64) {
+					file_delete("details.txt");
+					file_delete("rocks.txt");
+					game_restart();
+				}
+			}
 		}
 	break;
 }

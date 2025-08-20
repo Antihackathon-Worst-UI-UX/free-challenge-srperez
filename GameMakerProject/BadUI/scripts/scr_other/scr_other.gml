@@ -1,7 +1,9 @@
 function calc_username() {
 	var letters = [];
+	obj_game.password = false;
 	with obj_carved_rock {
 		if (!special and state == "placed") array_push(letters, id);
+		if (special and state == "placed") obj_game.password = true;
 	}
 	
 	array_sort(letters, function(l1, l2) {if (l1.x < l2.x) return -1; return 1;})

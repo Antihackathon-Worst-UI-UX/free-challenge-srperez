@@ -36,9 +36,9 @@ acc = {
 }
 
 min_acc = {
-	borders : 0.82,
-	fill : 0.92,
-	garbage : 0.93
+	borders : 0.8,
+	fill : 0.9,
+	garbage : 0.8
 }
 
 rsize = sprite_get_width(spr_rock);

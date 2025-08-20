@@ -27,9 +27,9 @@ var draw_field = function(half, pos_factor, label, ind) {
 	field_positions[ind] = bar_y;
 }
 
-var draw_login = function(half) {
+var draw_login = function(half, yy, label) {
 	
-	var ly = y + login_y * scale;
+	var ly = y + yy * scale;
 	
 	
 	draw_set_color(merge_color(sys.col_font, c_white, login_hover));
@@ -39,14 +39,29 @@ var draw_login = function(half) {
 	draw_set_color(sys.col_bg);
 	draw_set_halign(fa_center);
 	draw_set_valign(fa_middle);
-	draw_text_transformed(x, ly, "Log-in", scale, scale, 0);
+	draw_text_transformed(x, ly, label, scale, scale, 0);
 	draw_set_color($2200AA);
 	draw_text_transformed(x, ly - 90 * scale, error_message, scale * 0.7, scale * 0.7, 0);
 }
 
-draw_field(half, -0.65, "Username", 0);
-draw_field(half, -0.2, "Password", 1);
-draw_login(half);
+if (!logged_in) {
+	draw_field(half, -0.65, "Username", 0);
+	draw_field(half, -0.2, "Password", 1);
+	draw_login(half, login_y, "Log-in");
+}
+else {
+	draw_set_color(sys.col_font);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+	var txt = "Welcome " + obj_game.username + "!\nYou've succesfully logged in.\n \nAlthough, I didn't get to\nsee your password.\n\nso maybe I'll forget you";
+	draw_login(half, logout_y, "Log-out");
+	draw_login(half, forget_y, "Forget me");
+	
+	draw_set_color(sys.col_font);
+	draw_set_halign(fa_center);
+	draw_set_valign(fa_middle);
+	draw_text_transformed(x, y - 200 * scale, txt, scale, scale, 0);
+}
 
 draw_set_color(sys.col_font);
 if (hover_limit > 0) {

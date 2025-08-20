@@ -71,8 +71,11 @@ var draw_bar = function(yy, type, scale, txt, gfx) {
 	var barCol = merge_color(c_red, c_yellow, scale * 2);
 	if (scale >= 0.5) barCol = merge_color(c_yellow, c_green, scale * 2 - 1);
 	
-	draw_sprite_part_ext(spr_bar, type * 2 + 1, 0, 0, scale * sprite_get_width(spr_bar), sprite_get_height(spr_bar), bar_xoff, yy, bar_scale, bar_scale, barCol, image_alpha * bar_alpha);
-	draw_sprite_ext(spr_bar, type * 2, bar_xoff, yy, bar_scale, bar_scale, 0, sys.col_font, image_alpha * bar_alpha);
+	draw_sprite_part_ext(spr_bar, type * 3 + 1, 0, 0, scale * sprite_get_width(spr_bar), sprite_get_height(spr_bar), bar_xoff, yy, bar_scale, bar_scale, barCol, image_alpha * bar_alpha);
+	draw_sprite_ext(spr_bar, type * 3, bar_xoff, yy, bar_scale, bar_scale, 0, sys.col_font, image_alpha * bar_alpha);
+	if (scale < 1) {
+		draw_sprite_ext(spr_bar, type * 3 + 2, bar_xoff, yy, bar_scale, bar_scale, 0, c_black, image_alpha * bar_alpha * 0.8);
+	}
 	
 	draw_set_alpha(image_alpha * bar_alpha);
 	text_render(txt, bar_center_x, bar_center_y, 0.2 * bar_scale, fa_center, fa_middle, bar_text_wave, gfx);

@@ -112,6 +112,7 @@ switch state {
 		if (in_field) hs_target = 1.2;
 		
 		if (!mouse_check_button(mb_left)) {
+			calc_username();
 			if (in_field) {
 				place_x = mouse_x;
 				place_y = mouse_y;
@@ -168,6 +169,7 @@ switch state {
 		
 		if (obj_login_screen.state != "try") {
 			state = "waiting";
+			calc_username();
 			image_angle = 0;
 			break;
 		}

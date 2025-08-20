@@ -44,7 +44,9 @@ body {
     height: 100%;
     transition: all 0.2s;
     
-    display: inline-block
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar-div-selected {
@@ -89,7 +91,7 @@ body {
 	animation-name: fadeIn;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-out;
-	animation-duration: 0.4s;
+	animation-duration: 0.5s;
 }
 
 .fade-in-delay {
@@ -97,7 +99,7 @@ body {
 	animation-name: fadeInDelay;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-out;
-	animation-duration: 0.8s;
+	animation-duration: 1s;
 }
 
 @keyframes fadeIn {
